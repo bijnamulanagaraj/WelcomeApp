@@ -1,4 +1,6 @@
+// Write your code here
 import {Component} from 'react'
+
 import './index.css'
 
 class Welcome extends Component {
@@ -6,24 +8,29 @@ class Welcome extends Component {
     isSubscribed: false,
   }
 
-  subscribeButton = () => {
-    let buttonText
+  onSubscribe = () => {
+    this.setState(prevState => ({isSubscribed: !prevState.isSubscribed}))
+  }
 
+  getButtonText = () => {
     const {isSubscribed} = this.state
-    if (isSubscribed === false) {
-      buttonText = 'Subscribe'
-    } else {
-      buttonText = 'Subscribed'
-    }
+
+    return isSubscribed ? 'Subscribed' : 'Subscribe'
   }
 
   render() {
+    const buttonText = this.getButtonText()
+
     return (
-      <div className="main-container">
+      <div className="app-container">
         <h1 className="heading">Welcome</h1>
-        <p className="caption">Thank you!Happy Learning</p>
-        <button className="button" type="button" onClick={this.subscribeButton}>
-          Subcribe
+        <p className="description">Thank You! happy Learning</p>
+        <button
+          type="button"
+          className="subscribe-button"
+          onClick={this.onSubscribe}
+        >
+          {buttonText}
         </button>
       </div>
     )
